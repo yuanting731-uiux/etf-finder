@@ -1,0 +1,6 @@
+code,name,asset_class,asset_mid,asset_subclass,investment_type,active_passive,leverage,theme_factor,dividend_months,top5_holdings,investment_direction,official_url
+0050,元大台灣50,股票,區域,股票-區域-新興亞太-台灣,市值型,被動,一般,,"1, 7","台積電, 鴻海, 聯發科, 廣達, 中信金",追蹤台灣50指數，涵蓋台灣市值前50大上市公司。,https://www.yuantaetfs.com/product/detail/0050/ratio
+00891,中信關鍵半導體,股票,產業,"股票-產業-科技 | 股票-區域-新興亞太-台灣",主題型,被動,一般,半導體,"2, 5, 8, 11","台積電, 聯發科, 聯電, 日月光投控, 聯詠",追蹤臺灣半導體供應鏈，涵蓋上中下游關鍵 30 檔個股。,https://www.ctbcinvestments.com
+00679B,元大美債20年,債券,種類,"債券-種類-美國公債 | 債券-區域-北美 | 債券-期限-長天期",債券型,被動,一般,,"1, 4, 7, 10","US T 4.5% 2052, US T 3.625% 2053, US T 4% 2052, US T 4.125% 2053, US T 2.875% 2049",追蹤 20 年期以上美國公債指數。,https://www.yuantaetfs.com
+00893,國泰智能電動車,股票,產業,"股票-產業-科技 | 股票-區域-全球",主題型,被動,一般,能源轉型,,"Tesla, Nvidia, Aptiv, ON Semi, Infineon",投資於全球智能與電動車產業鏈相關 30 檔個股。,https://www.cathaysite.com.tw
+00631L,元大台灣50正2,槓桿反向,槓桿,槓桿反向-2x,槓桿反向型,被動,2x槓桿,,,"台灣50期貨, 現金, —, —, —",追蹤台灣50指數單日 2 倍正向報酬，適合短線操作。,https://www.yuantaetfs.com
