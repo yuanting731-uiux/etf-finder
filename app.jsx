@@ -97,15 +97,15 @@ const ASSET_TREE = [
     key: "原物料",
     mids: [
       {
-        key: "商品",
+        key: "貴金屬",
         leaves: [
           { key: "黃金", value: "原物料-貴金屬-黃金" },
           { key: "白銀", value: "原物料-貴金屬-白銀" },
-          { key: "石油", value: "原物料-石油" },
-          { key: "農產品", value: "原物料-農產品" },
-          { key: "工業金屬", value: "原物料-工業金屬" },
         ],
       },
+      { key: "能源", leaves: [{ key: "石油", value: "原物料-能源-石油" }] },
+      { key: "農產品", leaves: [{ key: "農產品", value: "原物料-農產品-農產品" }] },
+      { key: "工業金屬", leaves: [{ key: "工業金屬", value: "原物料-工業金屬-工業金屬" }] },
     ],
   },
   {
