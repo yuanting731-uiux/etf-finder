@@ -347,45 +347,6 @@ body {
   text-transform: none;
 }
 .cf__body { padding: 4px 0 6px; }
-.cf__body--months { padding: 6px 4px 8px; }
-
-.dm-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 4px;
-}
-.dm-cell {
-  appearance: none;
-  border: 1px solid var(--c-border);
-  background: var(--c-surface);
-  color: var(--c-text-2);
-  font: inherit;
-  font-size: 12px;
-  font-variant-numeric: tabular-nums;
-  font-weight: 500;
-  padding: 6px 0;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: all .12s ease;
-}
-.dm-cell:hover { border-color: var(--c-teal); color: var(--c-text); }
-.dm-cell--on {
-  background: var(--c-teal);
-  border-color: var(--c-teal);
-  color: #FFFFFF;
-}
-.dm-cell--on:hover {
-  background: var(--c-teal-deep);
-  border-color: var(--c-teal-deep);
-  color: #FFFFFF;
-}
-.dm-hint {
-  margin-top: 6px;
-  font-size: 11px;
-  color: var(--c-text-3);
-  line-height: 1.4;
-  padding: 0 4px;
-}
 
 .clear-btn {
   margin-top: 22px;

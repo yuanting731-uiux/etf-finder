@@ -103,9 +103,9 @@ const ASSET_TREE = [
           { key: "白銀", value: "原物料-貴金屬-白銀" },
         ],
       },
-      { key: "能源", leaves: [{ key: "能源期貨", value: "原物料-能源" }] },
-      { key: "農產品", leaves: [{ key: "農產品期貨", value: "原物料-農產品" }] },
-      { key: "工業金屬", leaves: [{ key: "工業金屬期貨", value: "原物料-工業金屬" }] },
+      { key: "能源", leaves: [{ key: "石油", value: "原物料-能源-石油" }] },
+      { key: "農產品", leaves: [{ key: "農產品", value: "原物料-農產品-農產品" }] },
+      { key: "工業金屬", leaves: [{ key: "工業金屬", value: "原物料-工業金屬-工業金屬" }] },
     ],
   },
   {
@@ -436,40 +436,6 @@ function LeafRow({ label, checked, onChange }) {
   );
 }
 
-// ---------- Dividend Months Filter ----------
-function DividendMonthsFilter({ selected, onToggle }) {
-  const [open, setOpen] = useState(false);
-  const count = selected.length;
-  return (
-    <div className="cf">
-      <button className="cf__head" onClick={() => setOpen(o => !o)}>
-        <Chevron open={open} />
-        <span className="cf__title">配息月份</span>
-        {count > 0 && <span className="cf__count">{count}</span>}
-      </button>
-      {open && (
-        <div className="cf__body cf__body--months">
-          <div className="dm-grid">
-            {Array.from({ length: 12 }, (_, i) => {
-              const m = i + 1;
-              const active = selected.includes(m);
-              return (
-                <button
-                  key={m}
-                  type="button"
-                  className={`dm-cell ${active ? "dm-cell--on" : ""}`}
-                  onClick={() => onToggle(m)}
-                >{m}</button>
-              );
-            })}
-          </div>
-          <div className="dm-hint">勾選想要配息的月份（任一符合即可）</div>
-        </div>
-      )}
-    </div>
-  );
-}
-
 // ---------- Collapsible Filter Section ----------
 function CollapsibleFilter({ title, options, selected, onToggle, defaultOpen = true }) {
   const [open, setOpen] = useState(defaultOpen);
@@ -653,7 +619,6 @@ function Sidebar({ filters, setFilters, favCount, onClear, mobileOpen, onClose }
       <CollapsibleFilter title="主被動" options={ACTIVE_PASSIVE} selected={filters.active_passive} onToggle={togglerFor("active_passive")} defaultOpen={false} />
       <CollapsibleFilter title="槓桿 / 反向倍數" options={LEVERAGE} selected={filters.leverage} onToggle={togglerFor("leverage")} defaultOpen={false} />
       <CollapsibleFilter title="主題 / 因子" options={THEMES} selected={filters.theme_factor} onToggle={togglerFor("theme_factor")} defaultOpen={false} />
-      <DividendMonthsFilter selected={filters.dividend_months} onToggle={togglerFor("dividend_months")} />
 
       <button className="clear-btn" onClick={onClear}>清除所有篩選</button>
     </aside>
@@ -778,14 +743,11 @@ function App() {
     active_passive: [],
     leverage: [],
     theme_factor: [],
-    dividend_months: [],
     favOnly: false,
   });
   const [page, setPage] = useState(1);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [sort, setSort] = useState({ key: "code", dir: "asc" });
-  const [recOpen, setRecOpen] = useState(false);
-  const [recState, markRecUsed] = window.useRecommenderState();
 
   useEffect(() => {
     document.documentElement.setAttribute("data-density", "compact");
@@ -830,10 +792,6 @@ function App() {
       if (filters.active_passive.length && !filters.active_passive.includes(etf.active_passive)) return false;
       if (filters.leverage.length && !filters.leverage.includes(etf.leverage)) return false;
       if (filters.theme_factor.length && !filters.theme_factor.some(t => (etf.theme_factor || []).includes(t))) return false;
-      if (filters.dividend_months.length) {
-        const months = etf.dividend_months || [];
-        if (!filters.dividend_months.some(m => months.includes(m))) return false;
-      }
       return true;
     });
   }, [data, query, filters, favs]);
@@ -854,15 +812,14 @@ function App() {
   const pageRows = sorted.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
 
   const clearAll = () => {
-    setFilters({ asset_subclass: [], investment_type: [], active_passive: [], leverage: [], theme_factor: [], dividend_months: [], favOnly: false });
+    setFilters({ asset_subclass: [], investment_type: [], active_passive: [], leverage: [], theme_factor: [], favOnly: false });
     setQuery("");
   };
 
   const activeFilterCount =
     filters.asset_subclass.length + filters.investment_type.length +
     filters.active_passive.length + filters.leverage.length +
-    filters.theme_factor.length + filters.dividend_months.length +
-    (filters.favOnly ? 1 : 0) + (query ? 1 : 0);
+    filters.theme_factor.length + (filters.favOnly ? 1 : 0) + (query ? 1 : 0);
 
   return (
     <div className="app">
@@ -902,11 +859,6 @@ function App() {
         />
 
         <main className="main">
-          <window.RecommendHero
-            hasUsed={recState.hasUsed}
-            onOpen={() => setRecOpen(true)}
-          />
-
           <div className="toolbar">
             <div className="search">
               <svg className="search__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
@@ -956,18 +908,6 @@ function App() {
       </footer>
 
       {mobileOpen && <div className="scrim" onClick={() => setMobileOpen(false)} />}
-
-      {recOpen && (
-        <window.RecommendModal
-          etfs={data}
-          onClose={() => setRecOpen(false)}
-          onDone={markRecUsed}
-          onAddFavs={(ids) => {
-            ids.forEach(id => { if (!favs.has(id)) toggleFav(id); });
-            setRecOpen(false);
-          }}
-        />
-      )}
     </div>
   );
 }
