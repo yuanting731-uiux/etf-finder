@@ -481,4 +481,23 @@
   .rec-hero__btn { flex: 1; justify-content: center; }
   .rec-q__sliderbig { font-size: 44px; }
   .rec-q__title { font-size: 18px; }
+
+  /* ETF cards stack vertically on mobile */
+  .rec-etf { flex-wrap: wrap; align-items: center; }
+  .rec-etf__sw { height: auto; align-self: stretch; }
+  .rec-etf__bucket { min-width: 90px; }
+  .rec-etf__detail {
+    flex: 1 1 100%;
+    border-left: 0;
+    border-top: 1px solid var(--c-border);
+    padding-left: 0;
+    padding-top: 8px;
+    margin-top: 4px;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+  }
+  .rec-etf__name { flex: 1 1 auto; }
+  .rec-div { margin-left: 0; flex-basis: 100%; }
+  .rec-div__cell { width: 100%; height: 18px; font-size: 9px; }
 }
